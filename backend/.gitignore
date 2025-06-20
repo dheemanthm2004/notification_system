@@ -40,9 +40,7 @@ Thumbs.db
 dist/
 build/
 
-# Prisma generated files (if not committed)
-#prisma/migrations/
-#prisma/dev.db
+
 
 # TypeScript build artifacts
 *.tsbuildinfo

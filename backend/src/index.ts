@@ -57,6 +57,7 @@ app.use(cors({
   origin: [
     "http://localhost:3000",
     "https://dheenotifications.vercel.app",
+    "https://dhee-notifications.vercel.app",
     "https://work-1-cwrsrehunnmktmlc.prod-runtime.all-hands.dev",
     "https://work-2-cwrsrehunnmktmlc.prod-runtime.all-hands.dev"
   ],
