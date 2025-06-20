@@ -12,7 +12,7 @@ router.post('/register', [
   body('email').isEmail().normalizeEmail(),
   body('name').trim().isLength({ min: 2, max: 50 }),
   body('password').isLength({ min: 8 })
-], async (req, res) => {
+], async (req: express.Request, res: express.Response) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -73,7 +73,7 @@ router.post('/register', [
 router.post('/login', [
   body('email').isEmail().normalizeEmail(),
   body('password').notEmpty()
-], async (req, res) => {
+], async (req: express.Request, res: express.Response) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -148,7 +148,7 @@ router.get('/me', authenticateToken, async (req: AuthRequest, res) => {
 router.put('/profile', authenticateToken, [
   body('name').optional().trim().isLength({ min: 2, max: 50 }),
   body('email').optional().isEmail().normalizeEmail()
-], async (req: AuthRequest, res) => {
+], async (req: AuthRequest, res: express.Response) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

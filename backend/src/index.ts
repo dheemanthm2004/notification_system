@@ -137,7 +137,8 @@ app.use('*', (req, res) => {
 startScheduler();
 
 // Start HTTP + WebSocket server
-const PORT = process.env.PORT || 4000;
+const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 4000;
+
 httpServer.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server listening on port ${PORT}`);
   console.log(`📊 API Documentation: http://localhost:${PORT}/api/docs`);
