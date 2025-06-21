@@ -14,6 +14,7 @@ import { startScheduler } from './scheduler/scheduler';
 import { sendInApp, setSocketServer } from './services/inAppService';
 import swaggerRouter from './swagger';
 import logsRouter from './routes/logs';
+import './worker/notificationWorker'; // add at top of index.ts
 
 dotenv.config();
 
