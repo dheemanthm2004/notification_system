@@ -62,3 +62,16 @@ frontend/out/
 # Turborepo cache (if you use it)
 .turbo/
 fixx.md
+CONTRIBUTING.md
+DEPLOYMENT.md
+TESTING.md
+SETUP.md
+docs/
+fixx.md
+CONTRIBUTING.md
+DEPLOYMENT.md
+TESTING.md
+SETUP.md
+LICENSE
+
+

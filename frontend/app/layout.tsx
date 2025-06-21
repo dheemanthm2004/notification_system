@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "DheeNotifications - Professional Notification Platform",
-  description: "A comprehensive notification management system with email, SMS, and in-app messaging capabilities",
+  description: "A comprehensive notification management system with email and SMS messaging capabilities",
 };
 
 export default function RootLayout({

@@ -9,7 +9,7 @@ export default function AboutPage() {
       <section>
         <h1 className="text-4xl font-bold text-gray-900 mb-4">About DheeNotifications</h1>
         <p className="text-base text-gray-700 leading-relaxed">
-          <strong>DheeNotifications</strong> is a full-stack notification infrastructure platform supporting <strong>Email</strong>, and <strong>SMS</strong>, and <strong></strong> channels.
+          <strong>DheeNotifications</strong> is a full-stack notification infrastructure platform supporting <strong>Email</strong>, and <strong>SMS</strong> channels.
           It includes capabilities for scheduled delivery, retries, bulk operations, and full observability. Inspired by internal tools used in production systems at SaaS companies, the goal is to build a real-world backend with job queues, background workers, and complete delivery tracking.
         </p>
       </section>
