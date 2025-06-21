@@ -32,7 +32,7 @@ router.post(
   authenticateToken,
   [
     body("to").isString().notEmpty(),
-    body("channel").isIn(["email", "sms", "in-app"]),
+    body("channel").isIn(["email", "sms"]),
     body("message").isString().notEmpty(),
     body("sendAt").optional().isISO8601(),
   ],

@@ -11,8 +11,7 @@ import { notificationQueue } from './queue/notificationQueue';
 import notifyRouter from './routes/notify';
 import authRouter from './routes/auth';
 import { startScheduler } from './scheduler/scheduler';
-import { sendInApp, setSocketServer } from './services/inAppService';
-import swaggerRouter from './swagger';
+ import swaggerRouter from './swagger';
 import logsRouter from './routes/logs';
 import './worker/notificationWorker'; // add at top of index.ts
 
@@ -76,25 +75,7 @@ app.use('/api/notify', notifyRouter);
 app.use('/api/docs', swaggerRouter);
 
 
-// Create HTTP and WebSocket servers
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: { origin: '*' },
-});
 
-// Socket.IO setup
-io.on('connection', (socket) => {
-  console.log('User connected:', socket.id);
-
-  // Join a room using socket ID (or user ID later)
-  socket.join(socket.id);
-
-  // Emit initial xconnected message
-  socket.emit('connected', { id: socket.id });
-});
-
-// Pass Socket.IO instance to other modules
-setSocketServer(io);
 
 // Health check route
 app.get('/', (req, res) => {
@@ -141,7 +122,7 @@ startScheduler();
 // Start HTTP + WebSocket server
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 4000;
 
-httpServer.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () =>  {
   console.log(`🚀 Server listening on port ${PORT}`);
   console.log(`📊 API Documentation: http://localhost:${PORT}/api/docs`);
   console.log(`🔐 Environment: ${process.env.NODE_ENV || 'development'}`);

@@ -21,12 +21,13 @@ const swaggerDocument = {
                 type: "object",
                 properties: {
                   to: { type: "string" },
-                  channel: { type: "string", enum: ["email", "sms", "in-app"] },
+                   channel: { type: "string", enum: ["email", "sms"] },
                   message: { type: "string" },
                   sendAt: {
                     type: "string",
                     format: "date-time",
-                    description: "Optional. ISO8601 string to schedule the message.",
+                    description: "API for sending notifications via Email and SMS channels."
+,
                   },
                 },
                 required: ["to", "channel", "message"]

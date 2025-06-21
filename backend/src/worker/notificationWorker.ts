@@ -1,7 +1,7 @@
 import { Worker, Job } from 'bullmq';
 import { sendEmail } from '../services/emailService';
 import { sendSMS } from '../services/smsService';
-import { sendInApp } from '../services/inAppService';
+
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import { redisConnection } from '../utils/redis';
@@ -19,14 +19,13 @@ const worker = new Worker(
 
     try {
       if (channel === 'email') {
-        await sendEmail(to, message);
-      } else if (channel === 'sms') {
-        await sendSMS(to, message);
-      } else if (channel === 'in-app') {
-        await sendInApp(to, message);
-      } else {
-        throw new Error('Unknown channel');
-      }
+  await sendEmail(to, message);
+} else if (channel === 'sms') {
+  await sendSMS(to, message);
+} else {
+  throw new Error('Unknown channel');
+}
+
     } catch (err: any) {
       status = 'failed';
       error = err.message;
