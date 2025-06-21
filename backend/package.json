@@ -35,12 +35,13 @@
     "node-cron": "^4.1.0",
     "nodemailer": "^7.0.3",
     "prisma": "^6.9.0",
+    "socket.io": "^4.8.1",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "twilio": "^5.7.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
+    "@types/cors": "^2.8.19",
     "@types/dotenv": "^6.1.1",
     "@types/node": "^22.15.30",
     "@types/node-cron": "^3.0.11",
