@@ -13,6 +13,7 @@ import {
   PaperAirplaneIcon,
   CloudArrowUpIcon,
   UserIcon,
+  InformationCircleIcon,
 } from '@heroicons/react/24/outline';
 
 const navigation = [
@@ -20,6 +21,7 @@ const navigation = [
   { name: 'Send Notification', href: '/notify', icon: PaperAirplaneIcon },
   { name: 'Bulk Send', href: '/bulk-send', icon: CloudArrowUpIcon },
   { name: 'Logs', href: '/logs', icon: DocumentTextIcon },
+  { name: 'About Project', href: '/about', icon: InformationCircleIcon },
 ];
 
 const Navigation: React.FC = () => {
@@ -58,25 +60,30 @@ const Navigation: React.FC = () => {
               })}
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <div className="ml-3 relative">
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-700">
-                  Welcome, {user?.name}
-                </span>
-                <button
-                  onClick={logout}
-                  className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  <UserIcon className="h-6 w-6" />
-                </button>
+
+          {/* Desktop User */}
+          <div className="hidden sm:ml-6 sm:flex sm:items-center relative">
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-gray-700">Welcome, {user?.name}</span>
+              <div className="relative group">
+                <UserIcon className="h-6 w-6 text-gray-500 cursor-pointer" />
+                <div className="absolute hidden group-hover:block right-0 mt-2 w-32 bg-white border border-gray-200 shadow-lg rounded-md z-10">
+                  <button
+                    onClick={logout}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Sign out
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Mobile Menu Button */}
           <div className="-mr-2 flex items-center sm:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className="bg-white p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             >
               {mobileMenuOpen ? (
                 <XMarkIcon className="block h-6 w-6" />
@@ -88,6 +95,7 @@ const Navigation: React.FC = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="sm:hidden">
           <div className="pt-2 pb-3 space-y-1">
@@ -114,16 +122,10 @@ const Navigation: React.FC = () => {
           </div>
           <div className="pt-4 pb-3 border-t border-gray-200">
             <div className="flex items-center px-4">
-              <div className="flex-shrink-0">
-                <UserIcon className="h-10 w-10 text-gray-400" />
-              </div>
+              <UserIcon className="h-10 w-10 text-gray-400" />
               <div className="ml-3">
-                <div className="text-base font-medium text-gray-800">
-                  {user?.name}
-                </div>
-                <div className="text-sm font-medium text-gray-500">
-                  {user?.email}
-                </div>
+                <div className="text-base font-medium text-gray-800">{user?.name}</div>
+                <div className="text-sm font-medium text-gray-500">{user?.email}</div>
               </div>
             </div>
             <div className="mt-3 space-y-1">
