@@ -9,7 +9,7 @@ export default function AboutPage() {
       <section>
         <h1 className="text-4xl font-bold text-gray-900 mb-4">About DheeNotifications</h1>
         <p className="text-base text-gray-700 leading-relaxed">
-          <strong>DheeNotifications</strong> is a full-stack notification infrastructure platform supporting <strong>Email</strong>, <strong>SMS</strong>, and <strong>In-App</strong> channels.
+          <strong>DheeNotifications</strong> is a full-stack notification infrastructure platform supporting <strong>Email</strong>, and <strong>SMS</strong>, and <strong></strong> channels.
           It includes capabilities for scheduled delivery, retries, bulk operations, and full observability. Inspired by internal tools used in production systems at SaaS companies, the goal is to build a real-world backend with job queues, background workers, and complete delivery tracking.
         </p>
       </section>
@@ -31,7 +31,7 @@ export default function AboutPage() {
           <li><strong>PostgreSQL + Prisma:</strong> SQL-based DB for structured data (users, logs, schedules). Prisma provides type-safe access, migrations, and clean schema modeling. Easy to trace jobs and failures.</li>
           <li><strong>Redis + BullMQ:</strong> Core of the system. Every send request creates a job in Redis. BullMQ handles retries, delays, backoff, and failure states, making the system fault-tolerant.</li>
           <li><strong>Node-Cron:</strong> A scheduler script that polls the DB every minute for jobs scheduled with `sendAt`. When ready, jobs are queued just like real-time ones.</li>
-          <li><strong>Socket.IO:</strong> Enables in-app push notifications via WebSocket connection to the frontend.</li>
+          
           <li><strong>SMTP & Twilio:</strong> Used for email and SMS delivery. Configured with appropriate credentials and failover logging.</li>
         </ul>
       </section>
@@ -64,7 +64,7 @@ export default function AboutPage() {
       <section>
         <h2 className="text-2xl font-semibold text-gray-900 border-b border-gray-300 pb-2">Core Features</h2>
         <ul className="list-disc list-inside text-gray-700 mt-4 space-y-2 text-base leading-relaxed">
-          <li>Multi-channel delivery: Email, SMS, and in-app</li>
+          <li>Multi-channel delivery: Email and SMS</li>
           <li>Scheduled notifications with accurate timestamp control</li>
           <li>Job queue with retry, delay, backoff and failure tracking</li>
           <li>Detailed logging of every message sent (status, time, error)</li>

@@ -14,7 +14,7 @@ import {
 const CHANNELS = [
   { value: 'email', label: 'Email', icon: EnvelopeIcon },
   { value: 'sms', label: 'SMS', icon: DevicePhoneMobileIcon },
-  { value: 'in-app', label: 'In-App', icon: BellIcon },
+  
 ];
 
 const NotifyPage: React.FC = () => {
@@ -59,8 +59,7 @@ const NotifyPage: React.FC = () => {
         return 'Enter email address (e.g., user@example.com)';
       case 'sms':
         return 'Enter phone number (e.g., +1234567890)';
-      case 'in-app':
-        return 'Enter user ID or identifier';
+      
       default:
         return 'Enter recipient';
     }

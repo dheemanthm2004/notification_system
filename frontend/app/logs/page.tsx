@@ -99,8 +99,7 @@ const LogsPage: React.FC = () => {
         return <EnvelopeIcon className="h-4 w-4 text-blue-500" />;
       case 'sms':
         return <DevicePhoneMobileIcon className="h-4 w-4 text-green-500" />;
-      case 'in-app':
-        return <BellIcon className="h-4 w-4 text-purple-500" />;
+      
       default:
         return <BellIcon className="h-4 w-4 text-gray-500" />;
     }
@@ -234,7 +233,7 @@ const LogsPage: React.FC = () => {
                   <option value="">All Channels</option>
                   <option value="email">Email</option>
                   <option value="sms">SMS</option>
-                  <option value="in-app">In-App</option>
+                  
                 </select>
               </div>
               <div className="flex items-end">
