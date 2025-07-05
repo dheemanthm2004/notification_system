@@ -80,7 +80,7 @@ app.use('/api/docs', swaggerRouter);
 // Health check route
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'Dheenotifications API is running!',
+    message: 'Dheenotifications API is running!!',
     version: '2.0.0',
     timestamp: new Date().toISOString()
   });

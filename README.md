@@ -144,7 +144,7 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 ## 👨‍💻 Author
 
 **Dheemanth Madaiah**
-[GitHub](https://github.com/dheemanthm2004) · [Email](mailto:dheemanthmadaiah@gmail.com)
+[Portfolio](https://dheemanthmadaiah.vercel.app) · [Email](mailto:dheemanthmadaiah@gmail.com)
 
 ---
 

@@ -84,9 +84,12 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="text-sm text-center text-gray-500 pt-12 border-t border-gray-300">
-        Built by Dheemanth M · Source on GitHub · Deployed via Vercel + Railway
-      </footer>
+     <footer className="text-xs text-center text-gray-400 pt-12 border-t border-gray-300 select-none">
+  🚀 Built by <a href="https://dheemanthmadaiah.vercel.app" className="underline hover:text-gray-600">Dheemanth M</a> ·  
+  <a href="https://github.com/dheemanthm2004/notification_system" className="underline hover:text-gray-600" target="_blank" rel="noopener noreferrer">Source</a> ·  
+  ⚡ Deployed on <span className="font-semibold">Vercel</span> + <span className="font-semibold">Railway</span>
+</footer>
+
     </main>
   );
 }
