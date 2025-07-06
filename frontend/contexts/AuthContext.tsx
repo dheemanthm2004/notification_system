@@ -57,9 +57,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(user);
   };
 
-  const logout = () => {
-    removeAuthToken();
-    setUser(null);
+  const logout = async () => {
+    try {
+      await api.post('/auth/logout');
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      removeAuthToken();
+      setUser(null);
+      window.location.href = '/login';
+    }
   };
 
   const value = {

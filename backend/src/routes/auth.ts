@@ -144,6 +144,16 @@ router.get('/me', authenticateToken, async (req: AuthRequest, res) => {
   }
 });
 
+// Logout
+router.post('/logout', authenticateToken, async (req: AuthRequest, res: express.Response) => {
+  try {
+    res.json({ message: 'Logged out successfully' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Update profile
 router.put('/profile', authenticateToken, [
   body('name').optional().trim().isLength({ min: 2, max: 50 }),
