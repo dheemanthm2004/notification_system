@@ -88,6 +88,9 @@ const SignupPage: React.FC = () => {
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
+          <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4">
+            ← Back to Home
+          </Link>
           <div className="flex justify-center mb-4">
             <div className="bg-blue-600 p-3 rounded-full">
               <BellIcon className="h-8 w-8 text-white" />
