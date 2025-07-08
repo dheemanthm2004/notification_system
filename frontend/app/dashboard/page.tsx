@@ -88,6 +88,15 @@ const DashboardPage: React.FC = () => {
     );
   }
 
+  // Status color mapping for consistency
+  const statusColors: Record<string, string> = {
+    success: '#10B981',   // green
+    failed: '#EF4444',    // red
+    pending: '#F59E0B',   // yellow
+    retrying: '#F59E0B',  // yellow
+    scheduled: '#6B7280', // gray
+  };
+
   // Prepare chart data for Status Distribution (Doughnut)
   const statusData = {
     labels: analytics.statusDistribution.map(item =>
@@ -96,11 +105,9 @@ const DashboardPage: React.FC = () => {
     datasets: [
       {
         data: analytics.statusDistribution.map(item => item._count.status),
-        backgroundColor: [
-          '#10B981', // success - green
-          '#EF4444', // failed - red
-          '#F59E0B', // retrying - yellow
-        ],
+        backgroundColor: analytics.statusDistribution.map(item => 
+          statusColors[item.status.toLowerCase()] || '#9CA3AF'
+        ),
         borderWidth: 0,
       },
     ],
@@ -108,9 +115,10 @@ const DashboardPage: React.FC = () => {
 
   // Channel colors for distinct bars
   const channelColors: Record<string, string> = {
-    email: '#3B82F6', // blue
-    sms: '#F59E0B',   // yellow
-    app: '#10B981',   // green
+    email: '#3B82F6',    // blue
+    sms: '#8B5CF6',      // purple
+    app: '#10B981',      // green
+    push: '#F59E0B',     // yellow
   };
 
   // Prepare chart data for Channel Usage (Bar)
@@ -121,12 +129,14 @@ const DashboardPage: React.FC = () => {
     datasets: [
       {
         label: 'Notifications Sent',
-        data: analytics.channelDistribution.map(item => item._count.channel),
+        data: analytics.channelDistribution.map(item => item._count.channel || 0),
         backgroundColor: analytics.channelDistribution.map(item =>
-          channelColors[item.channel.toLowerCase()] || '#9CA3AF' // fallback gray
+          channelColors[item.channel.toLowerCase()] || '#9CA3AF'
         ),
-        borderColor: '#2563EB',
-        borderWidth: 1,
+        borderColor: analytics.channelDistribution.map(item =>
+          channelColors[item.channel.toLowerCase()] || '#9CA3AF'
+        ),
+        borderWidth: 2,
       },
     ],
   };
@@ -134,33 +144,52 @@ const DashboardPage: React.FC = () => {
   // Prepare chart data for Daily Trends (Stacked Bar)
   const dailyBarData = {
     labels: analytics.dailyStats
-      .map(item => new Date(item.date).toLocaleDateString())
+      .map((item, index) => {
+        // Since backend is sending empty date objects, generate dates based on period
+        const today = new Date();
+        const daysAgo = analytics.dailyStats.length - 1 - index;
+        const date = new Date(today);
+        date.setDate(today.getDate() - daysAgo);
+        
+        return date.toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric' 
+        });
+      })
       .reverse(),
     datasets: [
       {
         label: 'Success',
-        data: analytics.dailyStats.map(item => item.success).reverse(),
+        data: analytics.dailyStats.map(item => item.success || 0).reverse(),
         backgroundColor: '#10B981', // green
+        borderColor: '#059669',
+        borderWidth: 1,
       },
       {
         label: 'Failed',
-        data: analytics.dailyStats.map(item => item.failed).reverse(),
+        data: analytics.dailyStats.map(item => item.failed || 0).reverse(),
         backgroundColor: '#EF4444', // red
+        borderColor: '#DC2626',
+        borderWidth: 1,
       },
       {
-        label: 'Retrying',
+        label: 'Pending',
         data: analytics.dailyStats
-          .map(item => item.total - item.success - item.failed)
+          .map(item => Math.max(0, (item.total || 0) - (item.success || 0) - (item.failed || 0)))
           .reverse(),
         backgroundColor: '#F59E0B', // yellow
+        borderColor: '#D97706',
+        borderWidth: 1,
       },
     ],
   };
 
   const successCount =
-    analytics.statusDistribution.find(s => s.status === 'success')?._count.status || 0;
+    analytics.statusDistribution.find(s => s.status.toLowerCase() === 'success')?._count.status || 0;
   const failedCount =
-    analytics.statusDistribution.find(s => s.status === 'failed')?._count.status || 0;
+    analytics.statusDistribution.find(s => s.status.toLowerCase() === 'failed')?._count.status || 0;
+  const pendingCount =
+    analytics.statusDistribution.find(s => ['pending', 'retrying', 'scheduled'].includes(s.status.toLowerCase()))?._count.status || 0;
   const successRate =
     analytics.totalNotifications > 0
       ? ((successCount / analytics.totalNotifications) * 100).toFixed(1)
@@ -251,13 +280,44 @@ const DashboardPage: React.FC = () => {
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <ClockIcon className="h-6 w-6 text-blue-400" />
+                <ClockIcon className="h-6 w-6 text-yellow-400" />
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">Success Rate</dt>
-                  <dd className="text-lg font-medium text-gray-900">{successRate}%</dd>
+                  <dt className="text-sm font-medium text-gray-500 truncate">Pending</dt>
+                  <dd className="text-lg font-medium text-gray-900">
+                    {pendingCount.toLocaleString()}
+                  </dd>
                 </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Success Rate Card */}
+      <div className="bg-white overflow-hidden shadow rounded-lg mb-6">
+        <div className="px-4 py-5 sm:p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg leading-6 font-medium text-gray-900">Success Rate</h3>
+              <div className="mt-2 flex items-baseline">
+                <p className="text-3xl font-semibold text-green-600">{successRate}%</p>
+                <p className="ml-2 text-sm text-gray-500">overall delivery success</p>
+              </div>
+            </div>
+            <div className="flex space-x-4 text-sm">
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                <span>Success: {successCount}</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                <span>Failed: {failedCount}</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                <span>Pending: {pendingCount}</span>
               </div>
             </div>
           </div>
@@ -282,7 +342,22 @@ const DashboardPage: React.FC = () => {
                     plugins: {
                       legend: {
                         position: 'bottom',
+                        labels: {
+                          usePointStyle: true,
+                          padding: 20,
+                        },
                       },
+                      tooltip: {
+                        callbacks: {
+                          label: function(context) {
+                            const label = context.label || '';
+                            const value = context.parsed || 0;
+                            const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${label}: ${value} (${percentage}%)`;
+                          }
+                        }
+                      }
                     },
                   }}
                 />

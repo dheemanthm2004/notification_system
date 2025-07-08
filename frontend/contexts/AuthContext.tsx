@@ -9,7 +9,7 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -58,15 +58,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
+    setLoading(true);
     try {
       await api.post('/auth/logout');
     } catch (error) {
       console.error('Logout error:', error);
-    } finally {
-      removeAuthToken();
-      setUser(null);
-      window.location.href = '/login';
     }
+    removeAuthToken();
+    setUser(null);
+    setLoading(false);
+    window.location.href = '/login';
   };
 
   const value = {

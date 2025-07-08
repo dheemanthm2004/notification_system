@@ -21,7 +21,7 @@ const navigation = [
   { name: 'Send Notification', href: '/notify', icon: PaperAirplaneIcon },
   { name: 'Bulk Send', href: '/bulk-send', icon: CloudArrowUpIcon },
   { name: 'Logs', href: '/logs', icon: DocumentTextIcon },
-  { name: 'About Project', href: '/about', icon: InformationCircleIcon },
+  { name: 'Project Details', href: '/project-details', icon: InformationCircleIcon },
 ];
 
 const Navigation: React.FC = () => {
@@ -92,9 +92,9 @@ const Navigation: React.FC = () => {
                         {user?.email}
                       </div>
                       <button
-                        onClick={() => {
+                        onClick={async () => {
                           setUserMenuOpen(false);
-                          logout();
+                          await logout();
                         }}
                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
@@ -158,9 +158,9 @@ const Navigation: React.FC = () => {
             </div>
             <div className="mt-3 space-y-1">
               <button
-                onClick={() => {
+                onClick={async () => {
                   setMobileMenuOpen(false);
-                  logout();
+                  await logout();
                 }}
                 className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 w-full text-left"
               >
