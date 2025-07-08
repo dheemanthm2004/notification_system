@@ -89,7 +89,7 @@ router.post(
   authenticateToken,
   upload.single('csvFile'),
   [
-    body("channel").isIn(["email", "sms"]), // in-app not supported for bulk
+    body("channel").isIn(["email", "sms"]), 
     body("message").isString().notEmpty(),
   ],
   async (req: AuthRequest, res: express.Response): Promise<void> => {
