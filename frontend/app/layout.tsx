@@ -3,6 +3,7 @@ import "./globals.css";
 import { AuthProvider } from "../contexts/AuthContext";
 import Layout from "../components/Layout";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "DheeNotifications - Professional Notification Platform",
@@ -57,6 +58,7 @@ export default function RootLayout({
             }}
           />
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
