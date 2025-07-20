@@ -162,21 +162,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-blue-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Join thousands of developers using DheeNotifications for their messaging needs
-          </p>
-          <Link href="/signup" className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-lg text-lg font-medium inline-flex items-center">
-            Create new Account
-            <ArrowRightIcon className="ml-2 h-5 w-5" />
-          </Link>
-        </div>
-      </section>
+     
 
       {/* Footer */}
       <footer className="bg-white py-12">
@@ -192,7 +178,7 @@ export default function Home() {
             <div className="flex justify-center space-x-6 text-sm text-gray-500">
               <a href="https://dheemanthmadaiah.vercel.app" className="hover:text-blue-600 transition-colors">Portfolio</a>
               <a href="https://github.com/dheemanthm2004" className="hover:text-blue-600 transition-colors">GitHub</a>
-              <a href="mailto:dheemanthmadaiah@gmail.com" className="hover:text-blue-600 transition-colors">Contact</a>
+              <a href="mailto:dheemanthm.official@gmail.com" className="hover:text-blue-600 transition-colors">Contact</a>
             </div>
           </div>
         </div>
