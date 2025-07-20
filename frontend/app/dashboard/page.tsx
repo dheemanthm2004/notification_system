@@ -99,13 +99,13 @@ const DashboardPage: React.FC = () => {
 
   // Prepare chart data for Status Distribution (Doughnut)
   const statusData = {
-    labels: analytics.statusDistribution.map(item =>
+    labels: (analytics.statusDistribution || []).map(item =>
       item.status.charAt(0).toUpperCase() + item.status.slice(1)
     ),
     datasets: [
       {
-        data: analytics.statusDistribution.map(item => item._count.status),
-        backgroundColor: analytics.statusDistribution.map(item => 
+        data: (analytics.statusDistribution || []).map(item => item._count.status),
+        backgroundColor: (analytics.statusDistribution || []).map(item => 
           statusColors[item.status.toLowerCase()] || '#9CA3AF'
         ),
         borderWidth: 0,
@@ -123,17 +123,17 @@ const DashboardPage: React.FC = () => {
 
   // Prepare chart data for Channel Usage (Bar)
   const channelData = {
-    labels: analytics.channelDistribution.map(item =>
+    labels: (analytics.channelDistribution || []).map(item =>
       item.channel.charAt(0).toUpperCase() + item.channel.slice(1)
     ),
     datasets: [
       {
         label: 'Notifications Sent',
-        data: analytics.channelDistribution.map(item => item._count.channel || 0),
-        backgroundColor: analytics.channelDistribution.map(item =>
+        data: (analytics.channelDistribution || []).map(item => item._count.channel || 0),
+        backgroundColor: (analytics.channelDistribution || []).map(item =>
           channelColors[item.channel.toLowerCase()] || '#9CA3AF'
         ),
-        borderColor: analytics.channelDistribution.map(item =>
+        borderColor: (analytics.channelDistribution || []).map(item =>
           channelColors[item.channel.toLowerCase()] || '#9CA3AF'
         ),
         borderWidth: 2,
@@ -142,12 +142,13 @@ const DashboardPage: React.FC = () => {
   };
 
   // Prepare chart data for Daily Trends (Stacked Bar)
+  const dailyStats = analytics.dailyStats || [];
   const dailyBarData = {
-    labels: analytics.dailyStats
+    labels: dailyStats
       .map((item, index) => {
         // Since backend is sending empty date objects, generate dates based on period
         const today = new Date();
-        const daysAgo = analytics.dailyStats.length - 1 - index;
+        const daysAgo = dailyStats.length - 1 - index;
         const date = new Date(today);
         date.setDate(today.getDate() - daysAgo);
         
@@ -160,21 +161,21 @@ const DashboardPage: React.FC = () => {
     datasets: [
       {
         label: 'Success',
-        data: analytics.dailyStats.map(item => item.success || 0).reverse(),
+        data: dailyStats.map(item => item.success || 0).reverse(),
         backgroundColor: '#10B981', // green
         borderColor: '#059669',
         borderWidth: 1,
       },
       {
         label: 'Failed',
-        data: analytics.dailyStats.map(item => item.failed || 0).reverse(),
+        data: dailyStats.map(item => item.failed || 0).reverse(),
         backgroundColor: '#EF4444', // red
         borderColor: '#DC2626',
         borderWidth: 1,
       },
       {
         label: 'Pending',
-        data: analytics.dailyStats
+        data: dailyStats
           .map(item => Math.max(0, (item.total || 0) - (item.success || 0) - (item.failed || 0)))
           .reverse(),
         backgroundColor: '#F59E0B', // yellow
@@ -184,15 +185,17 @@ const DashboardPage: React.FC = () => {
     ],
   };
 
+  const statusDistribution = analytics.statusDistribution || [];
   const successCount =
-    analytics.statusDistribution.find(s => s.status.toLowerCase() === 'success')?._count.status || 0;
+    statusDistribution.find(s => s.status.toLowerCase() === 'success')?._count.status || 0;
   const failedCount =
-    analytics.statusDistribution.find(s => s.status.toLowerCase() === 'failed')?._count.status || 0;
+    statusDistribution.find(s => s.status.toLowerCase() === 'failed')?._count.status || 0;
   const pendingCount =
-    analytics.statusDistribution.find(s => ['pending', 'retrying', 'scheduled'].includes(s.status.toLowerCase()))?._count.status || 0;
+    statusDistribution.find(s => ['pending', 'retrying', 'scheduled'].includes(s.status.toLowerCase()))?._count.status || 0;
+  const totalNotifications = analytics.totalNotifications || 0;
   const successRate =
-    analytics.totalNotifications > 0
-      ? ((successCount / analytics.totalNotifications) * 100).toFixed(1)
+    totalNotifications > 0
+      ? ((successCount / totalNotifications) * 100).toFixed(1)
       : '0';
 
   return (

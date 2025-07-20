@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 export default function Home() {
-  const { user, loading } = useAuth();
+  const { user, loading, demoLogin } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -23,6 +23,11 @@ export default function Home() {
       router.push('/dashboard');
     }
   }, [user, loading, router]);
+  
+  const handleDemoLogin = async () => {
+    await demoLogin();
+    router.push('/dashboard');
+  };
 
   if (loading) {
     return (
@@ -53,6 +58,18 @@ export default function Home() {
               <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
                 Get Started
               </Link>
+              <button 
+                onClick={handleDemoLogin} 
+                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center group relative">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Try Demo
+                <div className="absolute bottom-full right-0 mb-2 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  Skip login with a demo account
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -81,6 +98,18 @@ export default function Home() {
             <Link href="/login" className="border border-gray-300 hover:border-gray-400 text-gray-700 px-8 py-3 rounded-lg text-lg font-medium">
               Log In
             </Link>
+            <button 
+              onClick={handleDemoLogin} 
+              className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg text-lg font-medium flex items-center group relative">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Try Demo
+              <div className="absolute bottom-full mb-2 w-48 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                Instantly access the dashboard with a demo account
+              </div>
+            </button>
           </div>
         </div>
       </section>

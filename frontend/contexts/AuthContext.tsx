@@ -10,6 +10,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  demoLogin: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -70,12 +71,47 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     window.location.href = '/login';
   };
 
+  const demoLogin = async () => {
+    setLoading(true);
+    try {
+      // Use predefined demo credentials
+      const response = await api.post('/auth/login', { 
+        email: 'demo@example.com', 
+        password: 'Demo@123'
+      });
+      const { user, token } = response.data;
+      setAuthToken(token);
+      setUser(user);
+    } catch (error: any) {
+      // If login fails (first time), register the demo user
+      if (error.response?.status === 401) {
+        try {
+          const registerResponse = await api.post('/auth/register', {
+            name: 'Demo User',
+            email: 'demo@example.com',
+            password: 'Demo@123'
+          });
+          const { user, token } = registerResponse.data;
+          setAuthToken(token);
+          setUser(user);
+        } catch (registerError) {
+          console.error('Demo registration error:', registerError);
+        }
+      } else {
+        console.error('Demo login error:', error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const value = {
     user,
     loading,
     login,
     register,
     logout,
+    demoLogin,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
