@@ -65,14 +65,7 @@ router.post(
       } else {
         await notificationQueue.add(
           "send",
-          { userId, to, channel, message },
-          {
-            attempts: 3,
-            backoff: {
-              type: "exponential",
-              delay: 10000,
-            },
-          }
+          { userId, to, channel, message }
         );
         res.status(202).json({ status: "queued" });
       }
@@ -152,13 +145,6 @@ router.post(
             channel, 
             message,
             bulkUploadId: bulkUpload.id 
-          },
-          {
-            attempts: 3,
-            backoff: {
-              type: "exponential",
-              delay: 10000,
-            },
           }
         );
       }

@@ -33,8 +33,11 @@ export async function sendEmail(to: string, message: string) {
     });
 
     console.log(`📧 Email sent to ${to}: ${info.messageId}`);
+    return true;
   } catch (err) {
     console.error(`❌ Failed to send email to ${to}:`, err);
+    // Re-throw the error so the worker can handle it properly
+    throw err;
   }
 }
 //check if the environment variables are set

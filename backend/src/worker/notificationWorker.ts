@@ -18,14 +18,22 @@ const worker = new Worker(
     const attempt = job.attemptsMade + 1;
 
     try {
+      // Basic validation before sending
       if (channel === 'email') {
-  await sendEmail(to, message);
-} else if (channel === 'sms') {
-  await sendSMS(to, message);
-} else {
-  throw new Error('Unknown channel');
-}
-
+        // Simple email validation
+        if (!to || !to.includes('@') || !to.includes('.')) {
+          throw new Error('Invalid email address format');
+        }
+        await sendEmail(to, message);
+      } else if (channel === 'sms') {
+        // Simple phone validation - should start with + and contain only digits
+        if (!to || (to.charAt(0) !== '+' && !/^\d+$/.test(to))) {
+          throw new Error('Invalid phone number format');
+        }
+        await sendSMS(to, message);
+      } else {
+        throw new Error('Unknown channel');
+      }
     } catch (err: any) {
       status = 'failed';
       error = err.message;

@@ -310,10 +310,10 @@ const LogsPage: React.FC = () => {
                     </div>
                     {log.error && (
                       <div
-                        className="mt-1 text-xs text-red-600 max-w-xs truncate"
+                        className={`mt-1 text-xs text-red-600 max-w-xs ${expandedLogId === log.id ? '' : 'truncate'}`}
                         title={log.error}
                       >
-                        {log.error}
+                        <span className="font-semibold">Error:</span> {expandedLogId === log.id ? log.error : truncate(log.error, 50)}
                       </div>
                     )}
                   </td>
