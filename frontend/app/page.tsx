@@ -67,7 +67,7 @@ export default function Home() {
             </div>
           </div>
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Enterprise Notification Platform
+            Scalable Notification Delivery System
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Send, schedule, and manage email & SMS notifications at scale with advanced 
