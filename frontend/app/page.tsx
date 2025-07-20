@@ -75,11 +75,11 @@ export default function Home() {
           </p>
           <div className="flex justify-center space-x-4">
             <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium flex items-center">
-              Start Free Trial
+              Sign Up
               <ArrowRightIcon className="ml-2 h-5 w-5" />
             </Link>
             <Link href="/login" className="border border-gray-300 hover:border-gray-400 text-gray-700 px-8 py-3 rounded-lg text-lg font-medium">
-              Sign In
+              Log In
             </Link>
           </div>
         </div>
@@ -172,7 +172,7 @@ export default function Home() {
             Join thousands of developers using DheeNotifications for their messaging needs
           </p>
           <Link href="/signup" className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-lg text-lg font-medium inline-flex items-center">
-            Create Free Account
+            Create new Account
             <ArrowRightIcon className="ml-2 h-5 w-5" />
           </Link>
         </div>
