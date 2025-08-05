@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "NotifyOps",
     images: [
       {
-        url: "https://i.ibb.co/21nN5LWS/image.png", // External OG image link
+        url: "https://i.ibb.co/whXFqfnQ/image.png", // External OG image link
         width: 1200,
         height: 630,
         alt: "NotifyOps Preview",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NotifyOps - Scalable Notification Delivery Platform",
     description: "A comprehensive notification management system with email and SMS messaging capabilities",
-    images: ["https://i.ibb.co/21nN5LWS/image.png"],
+    images: ["https://i.ibb.co/whXFqfnQ/image.png"],
   },
 };
 
