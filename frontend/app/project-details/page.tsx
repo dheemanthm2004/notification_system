@@ -25,9 +25,9 @@ export default function ProjectDetailsPage() {
               <BellIcon className="h-12 w-12 text-white" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">DheeNotifications</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">NotifyOps</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Enterprise-grade notification infrastructure with multi-channel delivery, 
+            Scalable Notification Delivery System with multi-channel delivery, 
             advanced scheduling, and comprehensive analytics
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function ProjectDetailsPage() {
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-3">What is DheeNotifications?</h3>
+              <h3 className="text-lg font-semibold mb-3">What is NotifyOps?</h3>
               <p className="text-gray-700 leading-relaxed mb-4">
                 A production-ready notification platform built to handle enterprise-scale messaging 
                 requirements. Supports Email and SMS channels with advanced features like scheduling, 

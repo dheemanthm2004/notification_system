@@ -25,7 +25,7 @@ transporter.verify((error, success) => {
 export async function sendEmail(to: string, message: string) {
   try {
     const info = await transporter.sendMail({
-      from: `"Dheenotifications" <${process.env.SMTP_USER}>`,
+      from: `"🔔NotifyOps" <${process.env.SMTP_USER}>`,
       to,
       subject: 'Notification',
       text: message,

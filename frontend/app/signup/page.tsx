@@ -69,7 +69,7 @@ const SignupPage: React.FC = () => {
 
     try {
       await register(name, email, password);
-      toast.success('Welcome to DheeNotifications! 🎉');
+      toast.success('Welcome to NotifyOps! 🎉');
       router.push('/dashboard');
     } catch (error: any) {
       const errorMsg = error.response?.data?.error || 'Registration failed';
@@ -97,7 +97,7 @@ const SignupPage: React.FC = () => {
             </div>
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
-          <p className="text-gray-600">Join DheeNotifications today</p>
+          <p className="text-gray-600">Join NotifyOps today</p>
         </div>
 
         {/* Form Card */}

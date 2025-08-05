@@ -1,4 +1,4 @@
-# 📣 DheeNotifications – Scalable Email & SMS Notification System
+# 📣 NotifyOps – Scalable Email & SMS Notification System
 
 A full-stack, production-ready notification platform for sending, scheduling, and managing email/SMS notifications at scale. Built using **Node.js, Redis, PostgreSQL, and Next.js** with clean authentication, background job processing, and analytics.
 
@@ -8,7 +8,7 @@ A full-stack, production-ready notification platform for sending, scheduling, an
 
 ## 🔗 Live Links
 
-- **Frontend**: [dheenotifications.vercel.app](https://dheenotifications.vercel.app)
+- **Frontend**: [notifyops.vercel.app](https://notifyopss.vercel.app)
 - **API**: [dheenotifications-api.railway.app](https://dheenotifications-api.railway.app)
 
 ---

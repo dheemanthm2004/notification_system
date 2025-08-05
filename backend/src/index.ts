@@ -58,6 +58,7 @@ app.use(cors({
     "http://localhost:3000",
     "https://dheenotifications.vercel.app",
     "https://dhee-notifications.vercel.app",
+    "https://notifyopss.vercel.app",
     "https://work-1-cwrsrehunnmktmlc.prod-runtime.all-hands.dev",
     "https://work-2-cwrsrehunnmktmlc.prod-runtime.all-hands.dev"
   ],
@@ -80,7 +81,7 @@ app.use('/api/docs', swaggerRouter);
 // Health check route
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'Dheenotifications API is running!!',
+    message: 'NotifyOps API is running!!',
     version: '2.0.0',
     timestamp: new Date().toISOString()
   });
